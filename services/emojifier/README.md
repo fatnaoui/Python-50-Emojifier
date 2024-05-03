@@ -1,0 +1,1 @@
+you have to upload "glove.6B.50d.txt" file here.

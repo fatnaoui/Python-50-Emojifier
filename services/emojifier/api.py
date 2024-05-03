@@ -11,7 +11,7 @@ emoji_dictionary = {"0": "\u2764\uFE0F",
                    }
 
 embeddings = {}
-with open('glove.6B.50d.txt',encoding='utf-8') as f:
+with open('services/emojifier/glove.6B.50d.txt',encoding='utf-8') as f:
     for line in f:
         values = line.split()
         word = values[0]
@@ -26,9 +26,9 @@ def getOutputEmbeddings(X):
             embedding_matrix_output[ix][jx] = embeddings[X[ix][jx].lower()]
     return embedding_matrix_output
 
-with open("model.json", "r") as file:
+with open("services/emojifier/model.json", "r") as file:
     model = model_from_json(file.read())
-model.load_weights("model.h5")
+model.load_weights("services/emojifier/model.h5")
 
 def predict(x):
     X = pd.Series([x])
@@ -36,6 +36,7 @@ def predict(x):
     p = model.predict(emb_X)
     print(' '.join(X[0]))
     print(emoji.emojize(emoji_dictionary[str(np.argmax(p[0]))]))
+    return emoji.emojize(emoji_dictionary[str(np.argmax(p[0]))])
 
 if __name__=='__main__':
     print(predict("hello"))

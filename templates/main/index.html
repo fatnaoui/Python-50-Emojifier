@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
 {% block body %}
-    <h1>Hello World</h1>
+    <h1>Emojifier</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <textarea name="content" id="" cols="30" rows="10"></textarea>
+        <button type="submit">Predict</button>
+    </form>
+    <p>
+        {{ content }} {{ emoji }} 
+    </p>
 {% endblock %}
